@@ -2,15 +2,16 @@ package net.bondarik;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.CustomPostProcessor;
+import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 
 public class Main {
 
-    public static void main(String[] args) throws ClassNotFoundException, IOException, URISyntaxException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        System.out.println("Hello, world!");
+    public static void main(String[] args) throws ReflectiveOperationException, IOException, URISyntaxException {
+        ApplicationContext applicationContext = new ApplicationContext("net.bondarik");
+        applicationContext.close();
 
         BeanFactory beanFactory = new BeanFactory();
         beanFactory.addPostProcessors(new CustomPostProcessor());
@@ -26,8 +27,5 @@ public class Main {
         beanFactory.injectBeanFactory();
         System.out.println("Injected bean factory = " + productService.getBeanFactory());
         beanFactory.initializeBeans();
-
-
-
     }
 }

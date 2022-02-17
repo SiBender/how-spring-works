@@ -15,6 +15,10 @@ import java.net.URL;
 import java.util.*;
 
 public class BeanFactory {
+    public Map<String, Object> getSingletons() {
+        return singletons;
+    }
+
     private Map<String, Object> singletons = new HashMap<>();
     private List<BeanPostProcessor> postProcessors = new ArrayList<>();
 
@@ -103,5 +107,9 @@ public class BeanFactory {
                 postProcessor.postProcessorAfterInitialization(bean, name);
             }
         }
+    }
+
+    public void close() {
+
     }
 }
